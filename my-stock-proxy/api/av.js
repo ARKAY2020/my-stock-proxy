@@ -49,4 +49,15 @@ module.exports = async (req, res) => {
     console.error('API से डेटा लाने में त्रुटि:', error);
     res.status(500).json({ error: 'डेटा लाने में त्रुटि हुई। कृपया फिर से प्रयास करें।' });
   }
+  
 };
+
+// यह एक बहुत ही सरल प्रॉक्सी है जो CORS हेडर के साथ "Hello World" लौटाता है।
+module.exports = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  res.status(200).send('Hello World from Vercel Proxy!');
+};
+
