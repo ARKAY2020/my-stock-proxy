@@ -2,7 +2,7 @@
   "name": "my-stock-proxy",
   "version": "1.0.0",
   "description": "A proxy for Alpha Vantage API",
-  "main": "api/av.js",
+  "private": true,
   "scripts": {
     "start": "node api/av.js"
   },
