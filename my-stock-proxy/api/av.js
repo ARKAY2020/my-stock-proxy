@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   }
 
   // अनुरोध से URL पैरामीटर प्राप्त करें
-  const { function: apiFunction, symbol, outputsize = 'full' } = req.query;
+  const { function: apiFunction, symbol, outputsize = 'full', interval } = req.query;
 
   // सुनिश्चित करें कि आवश्यक पैरामीटर मौजूद हैं
   if (!apiFunction || !symbol) {
@@ -25,13 +25,17 @@ module.exports = async (req, res) => {
   }
 
   // API URL सेट करें
-  const url = `https://www.alphavantage.co/query?function=${apiFunction}&symbol=${symbol}&outputsize=${outputsize}&apikey=${ALPHA_VANTAGE_API_KEY}`;
+  let url = `https://www.alphavantage.co/query?function=${apiFunction}&symbol=${symbol}&outputsize=${outputsize}&apikey=${ALPHA_VANTAGE_API_KEY}`;
   
+  if (interval) {
+    url += `&interval=${interval}`;
+  }
+
   console.log(`API को प्रॉक्सी कर रहा है: ${url}`);
 
   try {
     const response = await fetch(url);
-    const data = await await response.json();
+    const data = await response.json();
 
     // Alpha Vantage API से एरर प्रतिक्रिया की जाँच करें
     if (data["Error Message"]) {
@@ -49,15 +53,4 @@ module.exports = async (req, res) => {
     console.error('API से डेटा लाने में त्रुटि:', error);
     res.status(500).json({ error: 'डेटा लाने में त्रुटि हुई। कृपया फिर से प्रयास करें।' });
   }
-  
 };
-
-// यह एक बहुत ही सरल प्रॉक्सी है जो CORS हेडर के साथ "Hello World" लौटाता है।
-module.exports = (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  res.status(200).send('Hello World from Vercel Proxy!');
-};
-
