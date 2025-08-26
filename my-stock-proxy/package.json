@@ -4,9 +4,10 @@
   "description": "A proxy for Alpha Vantage API",
   "main": "api/index.js", // इसे अपडेट करें
   "scripts": {
-    "start": "node api/index.js" // इसे अपडेट करें
+    "start": "node api/av.js" // इसे अपडेट करें
   },
   "dependencies": {
     "node-fetch": "^2.6.1"
   }
 }
+
