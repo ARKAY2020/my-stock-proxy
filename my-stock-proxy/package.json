@@ -4,7 +4,7 @@
   "description": "A proxy for Alpha Vantage API",
   "private": true,
   "scripts": {
-    "start": "node api/av.js"
+    "start": "node av.js"
   },
   "dependencies": {
     "node-fetch": "^2.6.1"
